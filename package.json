@@ -1,0 +1,12 @@
+{
+  "name": "import-meetup-avocado",
+  "version": "0.0.0",
+  "description": "import your meetup calendar into avocado.io",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "Dan McAulay",
+  "license": "BSD"
+}
