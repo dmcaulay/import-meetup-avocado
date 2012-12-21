@@ -4,13 +4,13 @@ config.transform = {
   name: "transform",
   fields : {
     time : {
-      output : "startTime"
+      output : "start"
     },
     duration : {
       transform : function(duration, current) {
         return current.startTime + duration
       },
-      output : "endTime"
+      output : "end"
     },
     name : {
       output : "title"

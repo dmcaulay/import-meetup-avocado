@@ -6,7 +6,10 @@ var Stream = require('pipeline-stream').Stream
 
 function createMeetupStream(config) {
   var stream = new Stream(config)
+  var once = true
   stream.onDrain = function() {
+    if (!once) return
+    once = false
     request({url: config.url, qs: config.qs}, function(err, res, body) {
       if (err) return stream.emit('error', err)
       stream.emit('data', body)
@@ -66,7 +69,7 @@ function createTransformStream(config) {
 }
 
 createMeetupStream(config.meetup)
-  .pipe(createThrottleStream(config.throttle))
+  // .pipe(createThrottleStream(config.throttle))
   .pipe(createJsonParseStream(config.jsonParse))
   .pipe(createArrayStream(config.array))
   .pipe(createTransformStream(config.transform))
