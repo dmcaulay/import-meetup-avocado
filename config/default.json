@@ -1,0 +1,21 @@
+{
+  "meetup" : {
+    "name" : "meetup",
+    "url" : "http://api.meetup.com/2/events.json",
+    "qs" : {
+      "key" : "MEETUP_API_KEY",
+      "signed" : true,
+      "rsvp" : "yes"
+    }
+  },
+  "throttle" : {
+    "delay" : 1000
+  },
+  "jsonParse" : {
+    "name" : "jsonParse",
+    "field" : "results"
+  },
+  "array" : {
+    "name" : "array"
+  }
+}
