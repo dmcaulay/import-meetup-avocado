@@ -4,7 +4,6 @@ var config = require('./config')
 var request = require('request')
 var Stream = require('pipeline-stream').Stream
 
-
 function createMeetupStream(config) {
   var stream = new Stream(config)
   var once = true
@@ -71,11 +70,12 @@ function createTransformStream(config) {
 
 function createAvocadoEventStream(config) {
   var stream = new Stream(config)
+  var client = avocado(config.credentials)
   stream.write = function(data) {
-    avocado.getSession(function(err, session) {
+    client.getSession(function(err, session) {
       if (err) return stream.emit('error', err)
       data.attending = session.user.id
-      avocado.request({method: 'POST', path: config.api.calendarPath, json: data}, function(err, body) {
+      client.request({method: 'POST', path: config.api.calendarPath, json: data}, function(err, body) {
         if (err) return stream.emit('error', err)
         console.log('created event', body)
         stream.emit('drain')
