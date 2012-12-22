@@ -8,7 +8,7 @@ config.transform = {
     },
     duration : {
       transform : function(duration, current) {
-        return current.startTime + duration
+        return current.start + duration
       },
       output : "end"
     },

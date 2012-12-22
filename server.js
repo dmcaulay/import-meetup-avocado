@@ -1,4 +1,5 @@
 
+var avocado = require('./lib/avocado')
 var config = require('./config')
 var request = require('request')
 var Stream = require('pipeline-stream').Stream
@@ -68,11 +69,28 @@ function createTransformStream(config) {
   return stream
 }
 
+function createAvocadoEventStream(config) {
+  var stream = new Stream(config)
+  stream.write = function(data) {
+    avocado.getSession(function(err, session) {
+      if (err) return stream.emit('error', err)
+      data.attending = session.user.id
+      avocado.request({method: 'POST', path: config.api.calendarPath, json: data}, function(err, body) {
+        if (err) return stream.emit('error', err)
+        console.log('created event', body)
+        stream.emit('drain')
+      })
+    })
+  }
+  return stream
+}
+
 createMeetupStream(config.meetup)
   // .pipe(createThrottleStream(config.throttle))
   .pipe(createJsonParseStream(config.jsonParse))
   .pipe(createArrayStream(config.array))
   .pipe(createTransformStream(config.transform))
-  .on('next', function(data) {
-    console.log('avocado event', data)
-  })
+  .pipe(createAvocadoEventStream(config.avocado))
+  // .on('next', function(data) {
+  //   console.log('avocado event', data)
+  // })

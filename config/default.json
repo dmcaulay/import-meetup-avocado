@@ -8,6 +8,21 @@
       "rsvp" : "yes"
     }
   },
+  "avocado" : {
+    "name" : "avocado",
+    "credentials" : {
+      "email" : "USER_EMAIL",
+      "password" : "USER_PASSWORD"
+    },
+    "api" : {
+      "id" : "DEV_ID",
+      "key" : "DEV_KEY",
+      "url" : "https://avocado.io/api",
+      "loginPath" : "/authentication/login",
+      "calendarPath" : "/calendar",
+      "cookieName" : "user_email"
+    }
+  },
   "throttle" : {
     "delay" : 1000
   },
