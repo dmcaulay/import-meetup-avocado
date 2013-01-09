@@ -12,8 +12,9 @@
   "dependencies": {
     "request": "~2.12.0",
     "config": "~0.4.18",
-    "pipeline-stream": "0.0.7",
     "async-resource": "0.0.1",
-    "mocha": "~1.7.4"
+    "mocha": "~1.7.4",
+    "underscore": "~1.4.3",
+    "pipeline-stream": "0.0.16"
   }
 }

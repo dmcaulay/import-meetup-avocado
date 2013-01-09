@@ -27,7 +27,10 @@
     "delay" : 1000
   },
   "jsonParse" : {
-    "name" : "jsonParse",
+    "name" : "jsonParse"
+  },
+  "meetupResults" : {
+    "name" : "meetupResults",
     "field" : "results"
   },
   "array" : {
